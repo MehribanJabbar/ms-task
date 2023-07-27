@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import static jakarta.persistence.EnumType.STRING;
+import static jakarta.persistence.FetchType.EAGER;
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
@@ -43,7 +44,7 @@ public class CardEntity {
     @Enumerated(STRING)
     private CardStatus cardStatus;
 
-    @ManyToOne(fetch = LAZY)
+    @ManyToOne
     @ToStringExclude
     private CustomerEntity customer;
 

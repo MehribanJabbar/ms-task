@@ -43,11 +43,7 @@ public class CustomerEntity {
     @Enumerated(STRING)
     private Status status;
 
-    @OneToMany(
-            fetch = FetchType.EAGER,
-            mappedBy = "customer",
-            cascade = ALL
-    )
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", cascade = ALL)
     @ToStringExclude
     private List<CardEntity> cards;
 
