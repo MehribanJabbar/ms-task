@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.1.0'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'groovy'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    implementation group: 'org.mapstruct', name: 'mapstruct', version: '1.5.5.Final'
+    runtimeOnly 'org.postgresql:postgresql'
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor('org.mapstruct:mapstruct-processor:1.5.5.Final')
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation 'org.liquibase:liquibase-core'
+
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.0'
+
+    implementation group: 'net.javacrumbs.shedlock', name: 'shedlock-spring', version: '5.3.0'
+    implementation 'net.javacrumbs.shedlock:shedlock-provider-jdbc-template:5.3.0'
+    implementation 'org.springframework.boot:spring-boot-starter-aop:3.1.0'
+
+    implementation group: 'org.apache.groovy', name: 'groovy', version: '4.0.0'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation group: 'org.spockframework', name: 'spock-spring', version: "2.2-M1-groovy-4.0"
+    testImplementation("io.github.benas:random-beans:3.9.0")
+
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

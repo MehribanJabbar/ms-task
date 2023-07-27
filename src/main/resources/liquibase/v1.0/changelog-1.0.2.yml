@@ -1,0 +1,57 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2023-07-10
+      author: Create Address table
+      changes:
+        - createTable:
+            tableName: address
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    foreignKeyName: fk_address_to_customers
+                    references: customers(id)
+              - column:
+                  name: street
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: city
+                  type: varchar(60)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: state
+                  type: varchar(255)
+              - column:
+                  name: postal_code
+                  type: varchar(25)
+              - column:
+                  name: status
+                  type: varchar(25)
+                  constraints:
+                    nullable: false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

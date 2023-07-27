@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2023-07-10
+      author: Create Customer Product table
+      changes:
+        - createTable:
+            tableName: customer_product
+            columns:
+              - column:
+                  name: customer_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_customer_product_to_customers
+                    references: customers(id)
+                    nullable: false
+              - column:
+                  name: product_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_customer_product_to_products
+                    references: products(id)
+                    nullable: false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
