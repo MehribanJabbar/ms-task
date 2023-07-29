@@ -1,6 +1,6 @@
 package az.ingress.ms.service;
 
-import az.ingress.ms.dao.entity.AddressEntity;
+import az.ingress.ms.dao.entity.Address;
 import az.ingress.ms.dao.repository.AddressRepository;
 import az.ingress.ms.exception.NotFoundException;
 import az.ingress.ms.mapper.AddressMapper;
@@ -49,7 +49,7 @@ public class AddressService {
         addressRepository.save(address);
     }
 
-    public AddressEntity fetchAddressIfExist(Long id){
+    public Address fetchAddressIfExist(Long id){
         return addressRepository.findById(id)
                 .orElseThrow(()-> new NotFoundException("ADDRESS_NOT_FOUND"));
     }

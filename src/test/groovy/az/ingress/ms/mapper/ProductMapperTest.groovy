@@ -1,6 +1,6 @@
 package az.ingress.ms.mapper
 
-import az.ingress.ms.dao.entity.ProductEntity
+import az.ingress.ms.dao.entity.Product
 import az.ingress.ms.model.request.SaveProductRequest
 import io.github.benas.randombeans.EnhancedRandomBuilder
 import io.github.benas.randombeans.api.EnhancedRandom
@@ -12,7 +12,7 @@ class ProductMapperTest extends Specification{
 
     def "TestBuildToResponse"(){
         given:
-        def product = random.nextObject(ProductEntity)
+        def product = random.nextObject(Product)
 
         when:
         def actual = ProductMapper.buildToResponse(product)

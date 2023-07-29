@@ -15,7 +15,7 @@ import static jakarta.persistence.EnumType.STRING;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductEntity {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,7 +33,7 @@ public class ProductEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductEntity that = (ProductEntity) o;
+        Product that = (Product) o;
         return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(price, that.price) && Objects.equals(stock, that.stock);
     }
 

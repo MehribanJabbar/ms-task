@@ -1,6 +1,6 @@
 package az.ingress.ms.service
 
-import az.ingress.ms.dao.entity.CustomerEntity
+import az.ingress.ms.dao.entity.Customer
 import az.ingress.ms.dao.repository.CustomerRepository
 import az.ingress.ms.exception.NotFoundException
 import az.ingress.ms.mapper.CustomerMapper
@@ -23,7 +23,7 @@ class CustomerServiceTest extends Specification{
     def "TestGetCustomerById success"(){
         given:
         def id = random.nextObject(Long)
-        def entity = random.nextObject(CustomerEntity)
+        def entity = random.nextObject(Customer)
 
         when:
         def actual = customerService.getCustomerById(id)
@@ -51,24 +51,40 @@ class CustomerServiceTest extends Specification{
         ex.message == "CUSTOMER_NOT_FOUND"
     }
 
+//    def "TestCreateCustomer success"(){
+//        given:
+//        def request = new SaveCustomerRequest()
+//        def customer = CustomerMapper.buildToEntity(request)
+//
+//        when:
+//        customerService.createCustomer(request)
+//
+//        then:
+//        1 * customerRepository.save(customer)
+//
+//    }
+
     def "TestCreateCustomer success"(){
         given:
         def request = new SaveCustomerRequest()
-        def customer = CustomerMapper.buildToEntity(request)
+        def entity = new Customer()
 
         when:
         customerService.createCustomer(request)
 
         then:
-        1 * customerRepository.save(customer)
-
+        1 * customerRepository.save(entity)
+        entity.birthDate == request.birthDate
+        entity.birthPlace == request.birthPlace
+        entity.age == request.age
+        entity.username == request.username
     }
 
     def "TestUpdateCustomer success"(){
         given:
         def id = random.nextObject(Long)
         def request = random.nextObject(UpdateCustomerRequest)
-        def customer = random.nextObject(CustomerEntity)
+        def customer = random.nextObject(Customer)
 
         when:
         customerService.updateCustomer(id, request)
@@ -96,7 +112,7 @@ class CustomerServiceTest extends Specification{
     def "TestDeleteCustomer success"(){
         given:
         def id = random.nextObject(Long)
-        def customer = random.nextObject(CustomerEntity)
+        def customer = random.nextObject(Customer)
 
         when:
         customerService.deleteCustomer(id)

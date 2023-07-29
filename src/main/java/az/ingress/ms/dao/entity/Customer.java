@@ -1,6 +1,7 @@
 package az.ingress.ms.dao.entity;
 
 import az.ingress.ms.model.enums.Status;
+import groovy.lang.Lazy;
 import jakarta.persistence.*;
 import lombok.*;
 import org.apache.commons.lang3.builder.ToStringExclude;
@@ -14,6 +15,7 @@ import java.util.Objects;
 
 import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.EnumType.STRING;
+import static jakarta.persistence.FetchType.EAGER;
 import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -23,7 +25,8 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CustomerEntity {
+@NamedEntityGraph(name = "customer_entity_graph", attributeNodes = @NamedAttributeNode("cards"))
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -43,9 +46,9 @@ public class CustomerEntity {
     @Enumerated(STRING)
     private Status status;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", cascade = ALL)
+    @OneToMany(fetch = EAGER, mappedBy = "customer", cascade = ALL)
     @ToStringExclude
-    private List<CardEntity> cards;
+    private List<Card> cards;
 
     @OneToOne(
             mappedBy = "customer",
@@ -53,7 +56,7 @@ public class CustomerEntity {
             fetch = LAZY
     )
     @ToStringExclude
-    private AddressEntity address;
+    private Address address;
 
 
     @ManyToMany(cascade = ALL)
@@ -64,13 +67,13 @@ public class CustomerEntity {
 
     )
     @ToStringExclude
-    private List<ProductEntity> products;
+    private List<Product> products;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CustomerEntity that = (CustomerEntity) o;
+        Customer that = (Customer) o;
         return age == that.age && Objects.equals(id, that.id) && Objects.equals(username, that.username) && Objects.equals(birthPlace, that.birthPlace) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt) && status == that.status;
     }
 

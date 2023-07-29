@@ -1,6 +1,6 @@
 package az.ingress.ms.service;
 
-import az.ingress.ms.dao.entity.CardEntity;
+import az.ingress.ms.dao.entity.Card;
 import az.ingress.ms.dao.repository.CardRepository;
 import az.ingress.ms.exception.NotFoundException;
 import az.ingress.ms.mapper.CardMapper;
@@ -55,7 +55,7 @@ public class CardService {
         cardRepository.save(cards);
     }
 
-    public CardEntity fetchCardIfExist(Long id){
+    public Card fetchCardIfExist(Long id){
         return cardRepository.findById(id)
                 .orElseThrow(()->new NotFoundException("CARD_NOT_FOUND"));
     }

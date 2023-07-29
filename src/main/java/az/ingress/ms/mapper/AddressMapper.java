@@ -1,13 +1,13 @@
 package az.ingress.ms.mapper;
 
-import az.ingress.ms.dao.entity.AddressEntity;
+import az.ingress.ms.dao.entity.Address;
 import az.ingress.ms.model.request.SaveAddressRequest;
 import az.ingress.ms.model.request.UpdateAddressRequest;
 import az.ingress.ms.model.response.AddressResponse;
 
 public class AddressMapper {
 
-    public static AddressResponse buildToResponse(AddressEntity address){
+    public static AddressResponse buildToResponse(Address address){
         return AddressResponse.builder()
                 .id(address.getId())
                 .city(address.getCity())
@@ -17,16 +17,16 @@ public class AddressMapper {
                 .build();
     }
 
-    public static AddressEntity buildToEntity(SaveAddressRequest addressRequest){
-        return AddressEntity.builder()
-                .state(addressRequest.getState())
-                .street(addressRequest.getStreet())
-                .city(addressRequest.getCity())
-                .postalCode(addressRequest.getPostalCode())
+    public static Address buildToEntity(SaveAddressRequest request){
+        return Address.builder()
+                .city(request.getCity())
+                .state(request.getState())
+                .street(request.getStreet())
+                .postalCode(request.getPostalCode())
                 .build();
     }
 
-    public static void updateToAddress(AddressEntity address, UpdateAddressRequest addressRequest){
+    public static void updateToAddress(Address address, UpdateAddressRequest addressRequest){
 
     }
 }

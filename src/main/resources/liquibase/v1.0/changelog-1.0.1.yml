@@ -4,11 +4,12 @@ databaseChangeLog:
       author: Mehriban Jabbar
       changes:
         - createTable:
-            tableName: cards
+            tableName: card
             columns:
               - column:
                   name: id
                   type: bigint
+                  autoIncrement: true
                   constraints:
                     nullable: false
                     primaryKey: true
@@ -53,7 +54,7 @@ databaseChangeLog:
                   name: customer_id
                   type: bigint
                   constraints:
-                    foreignKeyName: fk_cards_to_customers
-                    references: customers(id)
+                    foreignKeyName: fk_card_to_customer
+                    references: customer(id)
                     nullable: true
 

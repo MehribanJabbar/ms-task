@@ -5,16 +5,12 @@ import az.ingress.ms.model.request.UpdateAddressRequest;
 import az.ingress.ms.model.response.AddressResponse;
 import az.ingress.ms.service.AddressService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,8 +30,9 @@ public class AddressController {
     }
 
     @PostMapping
-    public void createAddress(@RequestBody SaveAddressRequest addressRequest){
-        addressService.createAddress(addressRequest);
+    @ResponseStatus(CREATED)
+    public void createAddress(@RequestBody SaveAddressRequest request){
+        addressService.createAddress(request);
     }
 
     @PutMapping("/{id}")

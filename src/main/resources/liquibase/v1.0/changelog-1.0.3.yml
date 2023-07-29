@@ -4,11 +4,12 @@ databaseChangeLog:
       author: Create Product table
       changes:
         - createTable:
-            tableName: products
+            tableName: product
             columns:
               - column:
                   name: id
                   type: bigint
+                  autoIncrement: true
                   constraints:
                     nullable: false
                     primaryKey: true

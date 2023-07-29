@@ -4,11 +4,12 @@ databaseChangeLog:
       author: Mehriban Jabbar
       changes:
         - createTable:
-            tableName: customers
+            tableName: customer
             columns:
               - column:
                   name: id
                   type: bigint
+                  autoIncrement: true
                   constraints:
                     nullable: false
                     primaryKey: true

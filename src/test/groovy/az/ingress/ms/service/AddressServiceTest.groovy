@@ -1,9 +1,8 @@
 package az.ingress.ms.service
 
-import az.ingress.ms.dao.entity.AddressEntity
+import az.ingress.ms.dao.entity.Address
 import az.ingress.ms.dao.repository.AddressRepository
 import az.ingress.ms.exception.NotFoundException
-import az.ingress.ms.mapper.AddressMapper
 import az.ingress.ms.model.request.SaveAddressRequest
 import az.ingress.ms.model.request.UpdateAddressRequest
 import io.github.benas.randombeans.EnhancedRandomBuilder
@@ -23,7 +22,7 @@ class AddressServiceTest extends Specification{
     def "TestGetAddressById success"(){
         given:
         def id = random.nextObject(Long)
-        def  entity = random.nextObject(AddressEntity)
+        def  entity = random.nextObject(Address)
 
         when:
         def actual = addressService.getAddressById(id)
@@ -67,20 +66,24 @@ class AddressServiceTest extends Specification{
     def "TestCreateAddress success"(){
         given:
         def request = new SaveAddressRequest()
-        def address = AddressMapper.buildToEntity(request)
+        def address = new Address()
 
         when:
         addressService.createAddress(request)
 
         then:
         1 * addressRepository.save(address)
+        address.street == request.street
+        address.state == request.state
+        address.postalCode == request.postalCode
+        address.city == request.city
     }
 
     def "TestUpdateAddress succes"(){
         given:
         def id = random.nextObject(Long)
         def request = random.nextObject(UpdateAddressRequest)
-        def address = random.nextObject(AddressEntity)
+        def address = random.nextObject(Address)
 
         when:
         addressService.updateAddress(id, request)
@@ -108,7 +111,7 @@ class AddressServiceTest extends Specification{
     def "TestDeleteAddress success"(){
         given:
         def id = random.nextObject(Long)
-        def address = random.nextObject(AddressEntity)
+        def address = random.nextObject(Address)
 
         when:
         addressService.deleteAddress(id)

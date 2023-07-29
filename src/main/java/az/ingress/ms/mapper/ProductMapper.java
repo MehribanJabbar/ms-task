@@ -1,13 +1,13 @@
 package az.ingress.ms.mapper;
 
-import az.ingress.ms.dao.entity.ProductEntity;
+import az.ingress.ms.dao.entity.Product;
 import az.ingress.ms.model.request.SaveProductRequest;
 import az.ingress.ms.model.request.UpdateProductRequest;
 import az.ingress.ms.model.response.ProductResponse;
 
 public class ProductMapper {
 
-    public static ProductResponse buildToResponse(ProductEntity product){
+    public static ProductResponse buildToResponse(Product product){
         return ProductResponse.builder()
                 .id(product.getId())
                 .name(product.getName())
@@ -17,8 +17,8 @@ public class ProductMapper {
                 .build();
     }
 
-    public static ProductEntity buildToEntity(SaveProductRequest productRequest){
-        return ProductEntity.builder()
+    public static Product buildToEntity(SaveProductRequest productRequest){
+        return Product.builder()
                 .name(productRequest.getName())
                 .description(productRequest.getDescription())
                 .price(productRequest.getPrice())
@@ -26,7 +26,7 @@ public class ProductMapper {
                 .build();
     }
 
-    public static void updateToProduct(ProductEntity product, UpdateProductRequest productRequest){
+    public static void updateToProduct(Product product, UpdateProductRequest productRequest){
 
     }
 }

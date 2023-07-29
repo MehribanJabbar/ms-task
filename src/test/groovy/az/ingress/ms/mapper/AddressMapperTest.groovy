@@ -1,7 +1,7 @@
 package az.ingress.ms.mapper
 
-import az.ingress.ms.dao.entity.AddressEntity
-import az.ingress.ms.model.request.SaveAddressRequest
+import az.ingress.ms.dao.entity.Address
+
 import io.github.benas.randombeans.EnhancedRandomBuilder
 import io.github.benas.randombeans.api.EnhancedRandom
 import spock.lang.Specification
@@ -12,7 +12,7 @@ class AddressMapperTest extends Specification{
 
     def "TestBuildToResponse"(){
         given:
-        def address = random.nextObject(AddressEntity)
+        def address = random.nextObject(Address)
 
         when:
         def actual = AddressMapper.buildToResponse(address)

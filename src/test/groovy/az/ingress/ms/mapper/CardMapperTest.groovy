@@ -1,6 +1,6 @@
 package az.ingress.ms.mapper
 
-import az.ingress.ms.dao.entity.CardEntity
+import az.ingress.ms.dao.entity.Card
 import az.ingress.ms.model.request.SaveCardRequest
 import io.github.benas.randombeans.EnhancedRandomBuilder
 import io.github.benas.randombeans.api.EnhancedRandom
@@ -12,7 +12,7 @@ class CardMapperTest extends Specification{
 
     def "TestBuildCardResponse"(){
         given:
-        def card = random.nextObject(CardEntity)
+        def card = random.nextObject(Card)
 
         when:
         def actual = CardMapper.buildCardResponse(card)

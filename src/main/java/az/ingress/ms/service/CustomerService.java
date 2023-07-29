@@ -1,6 +1,6 @@
 package az.ingress.ms.service;
 
-import az.ingress.ms.dao.entity.CustomerEntity;
+import az.ingress.ms.dao.entity.Customer;
 import az.ingress.ms.dao.repository.CustomerRepository;
 import az.ingress.ms.exception.NotFoundException;
 import az.ingress.ms.mapper.CustomerMapper;
@@ -53,7 +53,7 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
-    public CustomerEntity fetchCustomerIfExist(Long id){
+    public Customer fetchCustomerIfExist(Long id){
         return customerRepository.findById(id)
                 .orElseThrow(()->new NotFoundException("CUSTOMER_NOT_FOUND"));
 

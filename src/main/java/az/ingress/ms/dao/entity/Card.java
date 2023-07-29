@@ -12,8 +12,6 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 import static jakarta.persistence.EnumType.STRING;
-import static jakarta.persistence.FetchType.EAGER;
-import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
@@ -21,8 +19,7 @@ import static jakarta.persistence.FetchType.LAZY;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "cards")
-public class CardEntity {
+public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -46,13 +43,13 @@ public class CardEntity {
 
     @ManyToOne
     @ToStringExclude
-    private CustomerEntity customer;
+    private Customer customer;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CardEntity that = (CardEntity) o;
+        Card that = (Card) o;
         return Objects.equals(id, that.id);
     }
 

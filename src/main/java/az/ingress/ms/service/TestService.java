@@ -15,4 +15,5 @@ public class TestService {
         var customer = customerRepository.findByUsernameContaining("mehribanjabbar");
         customer.get(0).getCards().forEach(it -> System.out.println(it.getId()));
     }
+
 }

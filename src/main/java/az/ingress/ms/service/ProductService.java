@@ -1,6 +1,6 @@
 package az.ingress.ms.service;
 
-import az.ingress.ms.dao.entity.ProductEntity;
+import az.ingress.ms.dao.entity.Product;
 import az.ingress.ms.dao.repository.ProductRepository;
 import az.ingress.ms.exception.NotFoundException;
 import az.ingress.ms.mapper.ProductMapper;
@@ -51,7 +51,7 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public ProductEntity fetchProductIfExist(Long id){
+    public Product fetchProductIfExist(Long id){
         return productRepository.findById(id)
                 .orElseThrow(()-> new NotFoundException("PRODUCT_NOT_FOUND"));
     }

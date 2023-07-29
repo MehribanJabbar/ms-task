@@ -1,6 +1,6 @@
 package az.ingress.ms.service
 
-import az.ingress.ms.dao.entity.ProductEntity
+import az.ingress.ms.dao.entity.Product
 import az.ingress.ms.dao.repository.ProductRepository
 import az.ingress.ms.exception.NotFoundException
 import az.ingress.ms.mapper.ProductMapper
@@ -23,7 +23,7 @@ class ProductServiceTest extends Specification{
     def "TestProductById success"(){
         given:
         def id = random.nextObject(Long)
-        def entity = random.nextObject(ProductEntity)
+        def entity = random.nextObject(Product)
 
         when:
         def actual = productService.getProductById(id)
@@ -51,23 +51,39 @@ class ProductServiceTest extends Specification{
         ex.message == "PRODUCT_NOT_FOUND"
     }
 
+//    def "TestCreateProduct success"(){
+//        given:
+//        def request = new SaveProductRequest()
+//        def product = ProductMapper.buildToEntity(request)
+//
+//        when:
+//        productService.createProduct(request)
+//
+//        then:
+//        1 * productRepository.save(product)
+//    }
+
     def "TestCreateProduct success"(){
         given:
         def request = new SaveProductRequest()
-        def product = ProductMapper.buildToEntity(request)
+        def product = new Product()
 
         when:
         productService.createProduct(request)
 
         then:
         1 * productRepository.save(product)
+        product.stock == request.stock
+        product.price == request.price
+        product.name == request.name
+        product.description == request.description
     }
 
     def "TestUpdateProduct success"(){
         given:
         def id = random.nextObject(Long)
         def request = random.nextObject(UpdateProductRequest)
-        def product = random.nextObject(ProductEntity)
+        def product = random.nextObject(Product)
 
         when:
         productService.updateProduct(id, request)
@@ -95,7 +111,7 @@ class ProductServiceTest extends Specification{
     def "TestDeleteProduct success"(){
         given:
         def id = random.nextObject(Long)
-        def product = random.nextObject(ProductEntity)
+        def product = random.nextObject(Product)
 
         when:
         productService.deleteProduct(id)

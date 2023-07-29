@@ -10,15 +10,15 @@ databaseChangeLog:
                   name: customer_id
                   type: bigint
                   constraints:
-                    foreignKeyName: fk_customer_product_to_customers
-                    references: customers(id)
+                    foreignKeyName: fk_customer_product_to_customer
+                    references: customer(id)
                     nullable: false
               - column:
                   name: product_id
                   type: bigint
                   constraints:
-                    foreignKeyName: fk_customer_product_to_products
-                    references: products(id)
+                    foreignKeyName: fk_customer_product_to_product
+                    references: product(id)
                     nullable: false
 
 

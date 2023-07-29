@@ -1,7 +1,7 @@
 package az.ingress.ms.service
 
 
-import az.ingress.ms.dao.entity.CardEntity
+import az.ingress.ms.dao.entity.Card
 import az.ingress.ms.dao.repository.CardRepository
 import az.ingress.ms.exception.NotFoundException
 import az.ingress.ms.mapper.CardMapper
@@ -24,7 +24,7 @@ class CardServiceTest extends Specification{
     def "TestGetCardById success"(){
         given:
         def id = random.nextObject(Long)
-        def entity = random.nextObject(CardEntity)
+        def entity = random.nextObject(Card)
 
         when:
         def actual = cardService.getCardById(id)
@@ -56,7 +56,7 @@ class CardServiceTest extends Specification{
         given:
         def id = random.nextObject(Long)
         def request = random.nextObject(UpdateCardRequest)
-        def card = random.nextObject(CardEntity)
+        def card = random.nextObject(Card)
 
         when:
         cardService.updateCard(id, request)
@@ -81,22 +81,38 @@ class CardServiceTest extends Specification{
         ex.message == "CARD_NOT_FOUND"
     }
 
+//    def "TestCreateCard success"(){
+//        given:
+//        def request = new SaveCardRequest()
+//        def card = CardMapper.buildToEntity(request)
+//
+//        when:
+//        cardService.createCard(request)
+//
+//        then:
+//        1 * cardsRepository.save(card)
+//    }
+
     def "TestCreateCard success"(){
         given:
         def request = new SaveCardRequest()
-        def card = CardMapper.buildToEntity(request)
+        def card = new Card()
 
         when:
         cardService.createCard(request)
 
         then:
         1 * cardsRepository.save(card)
+        card.pan == request.pan
+        card.cvv == request.cvv
+        card.expirationDate == request.expirationDate
+        card.cardsHolder == request.cardsHolder
     }
 
     def "TestDeleteCard success"(){
         given:
         def id = random.nextObject(Long)
-        def entity = random.nextObject(CardEntity)
+        def entity = random.nextObject(Card)
 
         when:
         cardService.deleteCard(id)
