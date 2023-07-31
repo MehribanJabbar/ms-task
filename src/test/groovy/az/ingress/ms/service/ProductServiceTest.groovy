@@ -9,7 +9,7 @@ import io.github.benas.randombeans.EnhancedRandomBuilder
 import io.github.benas.randombeans.api.EnhancedRandom
 import spock.lang.Specification
 
-class ProductEntityServiceTest extends Specification {
+class ProductServiceTest extends Specification {
     private EnhancedRandom random = EnhancedRandomBuilder.aNewEnhancedRandom()
     private ProductService productService
     private ProductRepository productRepository

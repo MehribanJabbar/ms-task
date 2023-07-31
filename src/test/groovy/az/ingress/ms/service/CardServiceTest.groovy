@@ -10,7 +10,7 @@ import io.github.benas.randombeans.EnhancedRandomBuilder
 import io.github.benas.randombeans.api.EnhancedRandom
 import spock.lang.Specification
 
-class CardEntityServiceTest extends Specification {
+class CardServiceTest extends Specification {
     private EnhancedRandom random = EnhancedRandomBuilder.aNewEnhancedRandom()
     private CardRepository cardsRepository
     private CardService cardService

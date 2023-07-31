@@ -9,7 +9,7 @@ import io.github.benas.randombeans.EnhancedRandomBuilder
 import io.github.benas.randombeans.api.EnhancedRandom
 import spock.lang.Specification
 
-class AddressEntityServiceTest extends Specification {
+class AddressServiceTest extends Specification {
     private EnhancedRandom random = EnhancedRandomBuilder.aNewEnhancedRandom()
     private AddressService addressService
     private AddressRepository addressRepository
