@@ -5,15 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UpdateCustomerRequest {
-    private String username;
-    private int age;
-    private String birthPlace;
-    private LocalDate birthDate;
+public class SaveAddressRequest {
+
+    private String street;
+    private String city;
+    private String state;
+    private String postalCode;
 }

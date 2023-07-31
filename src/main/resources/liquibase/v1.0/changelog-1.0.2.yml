@@ -13,8 +13,8 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     primaryKey: true
-                    foreignKeyName: fk_address_to_customer
-                    references: customer(id)
+                    foreignKeyName: fk_address_to_customers
+                    references: customers(id)
               - column:
                   name: street
                   type: varchar(255)

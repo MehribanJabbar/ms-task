@@ -19,7 +19,8 @@ import static jakarta.persistence.EnumType.STRING;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Card {
+@Table(name = "cards")
+public class CardEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -43,13 +44,13 @@ public class Card {
 
     @ManyToOne
     @ToStringExclude
-    private Customer customer;
+    private CustomerEntity customer;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Card that = (Card) o;
+        CardEntity that = (CardEntity) o;
         return Objects.equals(id, that.id);
     }
 

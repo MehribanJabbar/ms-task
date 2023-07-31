@@ -1,24 +1,24 @@
 package az.ingress.ms.mapper;
 
-import az.ingress.ms.dao.entity.Address;
+import az.ingress.ms.dao.entity.AddressEntity;
 import az.ingress.ms.model.request.SaveAddressRequest;
 import az.ingress.ms.model.request.UpdateAddressRequest;
 import az.ingress.ms.model.response.AddressResponse;
 
 public class AddressMapper {
 
-    public static AddressResponse buildToResponse(Address address){
+    public static AddressResponse buildToResponse(AddressEntity addressEntity){
         return AddressResponse.builder()
-                .id(address.getId())
-                .city(address.getCity())
-                .state(address.getState())
-                .street(address.getStreet())
-                .postalCode(address.getPostalCode())
+                .id(addressEntity.getId())
+                .city(addressEntity.getCity())
+                .state(addressEntity.getState())
+                .street(addressEntity.getStreet())
+                .postalCode(addressEntity.getPostalCode())
                 .build();
     }
 
-    public static Address buildToEntity(SaveAddressRequest request){
-        return Address.builder()
+    public static AddressEntity buildToEntity(SaveAddressRequest request){
+        return AddressEntity.builder()
                 .city(request.getCity())
                 .state(request.getState())
                 .street(request.getStreet())
@@ -26,7 +26,10 @@ public class AddressMapper {
                 .build();
     }
 
-    public static void updateToAddress(Address address, UpdateAddressRequest addressRequest){
-
+    public static void updateToAddress(AddressEntity addressEntity, UpdateAddressRequest request){
+        addressEntity.setCity(request.getCity());
+        addressEntity.setStreet(request.getStreet());
+        addressEntity.setPostalCode(request.getPostalCode());
+        addressEntity.setState(request.getState());
     }
 }

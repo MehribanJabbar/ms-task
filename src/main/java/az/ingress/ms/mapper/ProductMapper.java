@@ -1,32 +1,35 @@
 package az.ingress.ms.mapper;
 
-import az.ingress.ms.dao.entity.Product;
+import az.ingress.ms.dao.entity.ProductEntity;
 import az.ingress.ms.model.request.SaveProductRequest;
 import az.ingress.ms.model.request.UpdateProductRequest;
 import az.ingress.ms.model.response.ProductResponse;
 
 public class ProductMapper {
 
-    public static ProductResponse buildToResponse(Product product){
+    public static ProductResponse buildToResponse(ProductEntity productEntity) {
         return ProductResponse.builder()
-                .id(product.getId())
-                .name(product.getName())
-                .description(product.getDescription())
-                .price(product.getPrice())
-                .stock(product.getStock())
+                .id(productEntity.getId())
+                .name(productEntity.getName())
+                .description(productEntity.getDescription())
+                .price(productEntity.getPrice())
+                .stock(productEntity.getStock())
                 .build();
     }
 
-    public static Product buildToEntity(SaveProductRequest productRequest){
-        return Product.builder()
-                .name(productRequest.getName())
-                .description(productRequest.getDescription())
-                .price(productRequest.getPrice())
-                .stock(productRequest.getStock())
+    public static ProductEntity buildToEntity(SaveProductRequest request) {
+        return ProductEntity.builder()
+                .name(request.getName())
+                .description(request.getDescription())
+                .price(request.getPrice())
+                .stock(request.getStock())
                 .build();
     }
 
-    public static void updateToProduct(Product product, UpdateProductRequest productRequest){
-
+    public static void updateToProduct(ProductEntity productEntity, UpdateProductRequest request) {
+        productEntity.setDescription(request.getDescription());
+        productEntity.setName(request.getName());
+        productEntity.setPrice(request.getPrice());
+        productEntity.setStock(request.getStock());
     }
 }

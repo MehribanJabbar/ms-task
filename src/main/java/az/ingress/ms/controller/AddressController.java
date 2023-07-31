@@ -21,7 +21,7 @@ public class AddressController {
 
     @GetMapping
     public List<AddressResponse> findAllAddress(){
-        return addressService.getAllAdress();
+        return addressService.getAllAddress();
     }
 
     @GetMapping("/{id}")

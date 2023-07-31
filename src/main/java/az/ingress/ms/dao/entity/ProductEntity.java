@@ -15,15 +15,19 @@ import static jakarta.persistence.EnumType.STRING;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Product {
+@Table(name = "products")
+public class ProductEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
+
     private String description;
+
     private BigDecimal price;
+
     private int stock;
 
     @Enumerated(STRING)
@@ -33,7 +37,7 @@ public class Product {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Product that = (Product) o;
+        ProductEntity that = (ProductEntity) o;
         return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(description, that.description) && Objects.equals(price, that.price) && Objects.equals(stock, that.stock);
     }
 
