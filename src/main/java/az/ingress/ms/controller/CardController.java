@@ -39,7 +39,7 @@ public class CardController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public void createCards(@RequestBody SaveCardRequest request){
+    public void saveCard(@RequestBody SaveCardRequest request){
         cardService.createCard(request);
     }
 

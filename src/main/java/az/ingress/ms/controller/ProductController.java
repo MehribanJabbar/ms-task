@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,13 +25,14 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ProductResponse findProductById(@PathVariable Long id){
+    @ResponseStatus(OK)
+    public ProductResponse getProductById(@PathVariable Long id){
         return productService.getProductById(id);
     }
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public void createProduct(@RequestBody SaveProductRequest request){
+    public void saveProduct(@RequestBody SaveProductRequest request){
         productService.createProduct(request);
     }
 

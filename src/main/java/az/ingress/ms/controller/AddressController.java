@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,13 +26,14 @@ public class AddressController {
     }
 
     @GetMapping("/{id}")
-    public AddressResponse findAddressById(@PathVariable Long id){
+    @ResponseStatus(OK)
+    public AddressResponse getAddressById(@PathVariable Long id){
         return addressService.getAddressById(id);
     }
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public void createAddress(@RequestBody SaveAddressRequest request){
+    public void saveAddress(@RequestBody SaveAddressRequest request){
         addressService.createAddress(request);
     }
 
