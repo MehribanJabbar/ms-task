@@ -4,7 +4,7 @@ databaseChangeLog:
       author: Mehriban Jabbar
       changes:
         - createTable:
-            tableName: customer
+            tableName: customers
             columns:
               - column:
                   name: id

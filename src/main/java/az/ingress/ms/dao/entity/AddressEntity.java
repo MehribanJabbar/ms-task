@@ -6,7 +6,6 @@ import lombok.*;
 import org.apache.commons.lang3.builder.ToStringExclude;
 
 import static jakarta.persistence.EnumType.STRING;
-import static jakarta.persistence.FetchType.EAGER;
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
@@ -16,7 +15,7 @@ import static jakarta.persistence.FetchType.LAZY;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "address")
-public class Address {
+public class AddressEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +33,6 @@ public class Address {
     @MapsId
     @JoinColumn(name = "id")
     @ToStringExclude
-    private Customer customer;
+    private CustomerEntity customer;
 
 }

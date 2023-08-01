@@ -1,7 +1,6 @@
 package az.ingress.ms.dao.entity;
 
 import az.ingress.ms.model.enums.Status;
-import groovy.lang.Lazy;
 import jakarta.persistence.*;
 import lombok.*;
 import org.apache.commons.lang3.builder.ToStringExclude;
@@ -25,8 +24,9 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "customers")
 @NamedEntityGraph(name = "customer_entity_graph", attributeNodes = @NamedAttributeNode("cards"))
-public class Customer {
+public class CustomerEntity {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -48,7 +48,7 @@ public class Customer {
 
     @OneToMany(fetch = EAGER, mappedBy = "customer", cascade = ALL)
     @ToStringExclude
-    private List<Card> cards;
+    private List<CardEntity> cards;
 
     @OneToOne(
             mappedBy = "customer",
@@ -56,24 +56,24 @@ public class Customer {
             fetch = LAZY
     )
     @ToStringExclude
-    private Address address;
+    private AddressEntity address;
 
 
     @ManyToMany(cascade = ALL)
     @JoinTable(
-            name = "customer_product",
-            joinColumns = @JoinColumn(name = "customer_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
+            name = "customers_products",
+            joinColumns = @JoinColumn(name = "customers_id"),
+            inverseJoinColumns = @JoinColumn(name = "products_id")
 
     )
     @ToStringExclude
-    private List<Product> products;
+    private List<ProductEntity> products;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Customer that = (Customer) o;
+        CustomerEntity that = (CustomerEntity) o;
         return age == that.age && Objects.equals(id, that.id) && Objects.equals(username, that.username) && Objects.equals(birthPlace, that.birthPlace) && Objects.equals(createdAt, that.createdAt) && Objects.equals(updatedAt, that.updatedAt) && status == that.status;
     }
 

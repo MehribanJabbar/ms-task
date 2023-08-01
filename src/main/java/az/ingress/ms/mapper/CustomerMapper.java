@@ -1,23 +1,23 @@
 package az.ingress.ms.mapper;
 
-import az.ingress.ms.dao.entity.Customer;
+import az.ingress.ms.dao.entity.CustomerEntity;
 import az.ingress.ms.model.request.SaveCustomerRequest;
 import az.ingress.ms.model.request.UpdateCustomerRequest;
 import az.ingress.ms.model.response.CustomerResponse;
 
 public class CustomerMapper {
-    public static CustomerResponse buildToResponse(Customer customer){
+    public static CustomerResponse buildToResponse(CustomerEntity customerEntity){
         return CustomerResponse.builder()
-                .id(customer.getId())
-                .birthDate(customer.getBirthDate())
-                .age(customer.getAge())
-                .username(customer.getUsername())
-                .birthPlace(customer.getBirthPlace())
+                .id(customerEntity.getId())
+                .birthDate(customerEntity.getBirthDate())
+                .age(customerEntity.getAge())
+                .username(customerEntity.getUsername())
+                .birthPlace(customerEntity.getBirthPlace())
                 .build();
     }
 
-    public static Customer buildToEntity(SaveCustomerRequest customerRequest){
-        return Customer.builder()
+    public static CustomerEntity buildToEntity(SaveCustomerRequest customerRequest){
+        return CustomerEntity.builder()
                 .age(customerRequest.getAge())
                 .username(customerRequest.getUsername())
                 .birthPlace(customerRequest.getBirthPlace())
@@ -25,7 +25,10 @@ public class CustomerMapper {
                 .build();
     }
 
-    public static void updateToCustomer(Customer customer, UpdateCustomerRequest customerRequest){
-
+    public static void updateToCustomer(CustomerEntity customerEntity, UpdateCustomerRequest request){
+        customerEntity.setUsername(request.getUsername());
+        customerEntity.setBirthPlace(request.getBirthPlace());
+        customerEntity.setBirthDate(request.getBirthDate());
+        customerEntity.setAge(request.getAge());
     }
 }

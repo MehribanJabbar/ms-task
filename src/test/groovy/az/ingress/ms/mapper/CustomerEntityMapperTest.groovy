@@ -1,18 +1,18 @@
 package az.ingress.ms.mapper
 
-import az.ingress.ms.dao.entity.Customer
+import az.ingress.ms.dao.entity.CustomerEntity
 import az.ingress.ms.model.request.SaveCustomerRequest
 import io.github.benas.randombeans.EnhancedRandomBuilder
 import io.github.benas.randombeans.api.EnhancedRandom
 import spock.lang.Specification
 
-class CustomerMapperTest extends Specification{
+class CustomerEntityMapperTest extends Specification{
     private EnhancedRandom random = EnhancedRandomBuilder.aNewEnhancedRandom()
     private CustomerMapper customerMapper
 
     def "TestBuildToResponse"(){
         given:
-        def customer = random.nextObject(Customer)
+        def customer = random.nextObject(CustomerEntity)
 
         when:
         def actual = CustomerMapper.buildToResponse(customer)

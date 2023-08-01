@@ -1,29 +1,45 @@
 package az.ingress.ms.service
 
-import az.ingress.ms.dao.entity.Customer
+import az.ingress.ms.dao.entity.CustomerEntity
 import az.ingress.ms.dao.repository.CustomerRepository
 import az.ingress.ms.exception.NotFoundException
-import az.ingress.ms.mapper.CustomerMapper
 import az.ingress.ms.model.request.SaveCustomerRequest
 import az.ingress.ms.model.request.UpdateCustomerRequest
 import io.github.benas.randombeans.EnhancedRandomBuilder
 import io.github.benas.randombeans.api.EnhancedRandom
 import spock.lang.Specification
 
-class CustomerServiceTest extends Specification{
+class CustomerServiceTest extends Specification {
     private EnhancedRandom random = EnhancedRandomBuilder.aNewEnhancedRandom()
     private CustomerService customerService
     private CustomerRepository customerRepository
 
-    def setup(){
+    def setup() {
         customerRepository = Mock()
         customerService = new CustomerService(customerRepository)
     }
 
-    def "TestGetCustomerById success"(){
+
+
+    def "TestGetAllCustomers"(){
+        given:
+        def customer = random.nextObject(CustomerEntity)
+
+        when:
+        def actual = customerService.getAllCustomers()
+
+        then:
+        1 * customerRepository.findAll() >> List.of(customer)
+        actual[0].username == customer.username
+        actual[0].age == customer.age
+        actual[0].birthPlace == customer.birthPlace
+        actual[0].birthDate == customer.birthDate
+    }
+
+    def "TestGetCustomerById success"() {
         given:
         def id = random.nextObject(Long)
-        def entity = random.nextObject(Customer)
+        def entity = random.nextObject(CustomerEntity)
 
         when:
         def actual = customerService.getCustomerById(id)
@@ -37,7 +53,7 @@ class CustomerServiceTest extends Specification{
         actual.birthPlace == entity.birthPlace
     }
 
-    def "TestGetCardById entity not found"(){
+    def "TestGetCustomerById entity not found"() {
         given:
         def id = random.nextObject(Long)
 
@@ -51,23 +67,15 @@ class CustomerServiceTest extends Specification{
         ex.message == "CUSTOMER_NOT_FOUND"
     }
 
-//    def "TestCreateCustomer success"(){
-//        given:
-//        def request = new SaveCustomerRequest()
-//        def customer = CustomerMapper.buildToEntity(request)
-//
-//        when:
-//        customerService.createCustomer(request)
-//
-//        then:
-//        1 * customerRepository.save(customer)
-//
-//    }
-
-    def "TestCreateCustomer success"(){
+    def "TestCreateCustomer success"() {
         given:
-        def request = new SaveCustomerRequest()
-        def entity = new Customer()
+        def request = random.nextObject(SaveCustomerRequest)
+        def entity = CustomerEntity.builder()
+                .username(request.username)
+                .age(request.age)
+                .birthPlace(request.birthPlace)
+                .birthDate(request.birthDate)
+                .build()
 
         when:
         customerService.createCustomer(request)
@@ -80,11 +88,11 @@ class CustomerServiceTest extends Specification{
         entity.username == request.username
     }
 
-    def "TestUpdateCustomer success"(){
+    def "TestUpdateCustomer success"() {
         given:
         def id = random.nextObject(Long)
         def request = random.nextObject(UpdateCustomerRequest)
-        def customer = random.nextObject(Customer)
+        def customer = random.nextObject(CustomerEntity)
 
         when:
         customerService.updateCustomer(id, request)
@@ -92,9 +100,13 @@ class CustomerServiceTest extends Specification{
         then:
         1 * customerRepository.findById(id) >> Optional.of(customer)
         1 * customerRepository.save(customer)
+        request.username == customer.username
+        request.age == customer.age
+        request.birthPlace == customer.birthPlace
+        request.birthDate == customer.birthDate
     }
 
-    def "TestUpdateCustomer entity not found"(){
+    def "TestUpdateCustomer entity not found"() {
         given:
         def id = random.nextObject(Long)
         def request = random.nextObject(UpdateCustomerRequest)
@@ -109,10 +121,10 @@ class CustomerServiceTest extends Specification{
         ex.message == "CUSTOMER_NOT_FOUND"
     }
 
-    def "TestDeleteCustomer success"(){
+    def "TestDeleteCustomer success"() {
         given:
         def id = random.nextObject(Long)
-        def customer = random.nextObject(Customer)
+        def customer = random.nextObject(CustomerEntity)
 
         when:
         customerService.deleteCustomer(id)
@@ -122,7 +134,7 @@ class CustomerServiceTest extends Specification{
         1 * customerRepository.save(customer)
     }
 
-    def "TestDeleteCustomer entity not found"(){
+    def "TestDeleteCustomer entity not found"() {
         given:
         def id = random.nextObject(Long)
 

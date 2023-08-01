@@ -4,21 +4,21 @@ databaseChangeLog:
       author: Create Customer Product table
       changes:
         - createTable:
-            tableName: customer_product
+            tableName: customers_products
             columns:
               - column:
                   name: customer_id
                   type: bigint
                   constraints:
-                    foreignKeyName: fk_customer_product_to_customer
-                    references: customer(id)
+                    foreignKeyName: fk_customers_products_to_customers
+                    references: customers(id)
                     nullable: false
               - column:
                   name: product_id
                   type: bigint
                   constraints:
-                    foreignKeyName: fk_customer_product_to_product
-                    references: product(id)
+                    foreignKeyName: fk_customers_products_to_products
+                    references: products(id)
                     nullable: false
 
 

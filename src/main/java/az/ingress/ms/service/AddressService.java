@@ -1,6 +1,6 @@
 package az.ingress.ms.service;
 
-import az.ingress.ms.dao.entity.Address;
+import az.ingress.ms.dao.entity.AddressEntity;
 import az.ingress.ms.dao.repository.AddressRepository;
 import az.ingress.ms.exception.NotFoundException;
 import az.ingress.ms.mapper.AddressMapper;
@@ -21,7 +21,7 @@ import static az.ingress.ms.model.enums.Status.DELETED;
 public class AddressService {
     private final AddressRepository addressRepository;
 
-    public List<AddressResponse> getAllAdress(){
+    public List<AddressResponse> getAllAddress(){
         List<AddressResponse> addressResponses = addressRepository.findAll()
                 .stream().map(AddressMapper::buildToResponse)
                 .collect(Collectors.toList());
@@ -49,7 +49,7 @@ public class AddressService {
         addressRepository.save(address);
     }
 
-    public Address fetchAddressIfExist(Long id){
+    public AddressEntity fetchAddressIfExist(Long id){
         return addressRepository.findById(id)
                 .orElseThrow(()-> new NotFoundException("ADDRESS_NOT_FOUND"));
     }
