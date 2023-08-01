@@ -19,6 +19,8 @@ class CustomerServiceTest extends Specification {
         customerService = new CustomerService(customerRepository)
     }
 
+
+
     def "TestGetAllCustomers"(){
         given:
         def customer = random.nextObject(CustomerEntity)

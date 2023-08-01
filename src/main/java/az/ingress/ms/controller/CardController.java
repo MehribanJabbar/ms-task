@@ -27,6 +27,7 @@ public class CardController {
     private final CardService cardService;
 
     @GetMapping
+    @ResponseStatus(OK)
     public List<CardResponse> getAllCards(){
         return cardService.getAllCards();
     }

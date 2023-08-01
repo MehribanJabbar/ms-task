@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,7 +20,8 @@ public class AddressController {
     private final AddressService addressService;
 
     @GetMapping
-    public List<AddressResponse> findAllAddress(){
+    @ResponseStatus(OK)
+    public List<AddressResponse> getAllAddress(){
         return addressService.getAllAddress();
     }
 
@@ -38,11 +38,13 @@ public class AddressController {
     }
 
     @PutMapping("/{id}")
+    @ResponseStatus(NO_CONTENT)
     public void updateAddress(@PathVariable Long id, @RequestBody UpdateAddressRequest addressRequest){
         addressService.updateAddress(id, addressRequest);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
+    @ResponseStatus(NO_CONTENT)
     public void deleteAddress(@PathVariable Long id){
         addressService.deleteAddress(id);
     }

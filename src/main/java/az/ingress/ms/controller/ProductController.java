@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -20,7 +19,8 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
-    public List<ProductResponse> findAllProducts(){
+    @ResponseStatus(OK)
+    public List<ProductResponse> getAllProducts(){
        return productService.getAllProducts();
     }
 
@@ -37,11 +37,13 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
+    @ResponseStatus(NO_CONTENT)
     public void updateProduct(@PathVariable Long id, @RequestBody UpdateProductRequest productRequest){
         productService.updateProduct(id, productRequest);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(NO_CONTENT)
     public void deleteProduct(@PathVariable Long id){
         productService.deleteProduct(id);
     }
